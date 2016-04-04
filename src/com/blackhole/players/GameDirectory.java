@@ -1,0 +1,14 @@
+package com.blackhole.players;
+
+import com.blackhole.Player;
+import game.Directory;
+
+public class GameDirectory {
+    private static final Directory<Player> directory = new Directory<>();
+    static {
+        directory.register(RandomPlayer.class, RandomPlayer::new);
+    }
+    public static Directory<Player> get(){
+        return directory;
+    }
+}
