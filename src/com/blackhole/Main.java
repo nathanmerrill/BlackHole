@@ -8,7 +8,7 @@ public class Main {
 
     public static void main(String[] args) {
         GameManager<Player> gameManager = new GameManager<>(BlackHole::new, GameDirectory.get()).maxPlayerCount(2);
-        EloTournament<Player> tournament = new EloTournament<>(gameManager, 10);
-        tournament.run();
+        EloTournament<Player> tournament = new EloTournament<>(gameManager, 100);
+        System.out.print(tournament.run());
     }
 }

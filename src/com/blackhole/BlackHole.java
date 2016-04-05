@@ -3,16 +3,15 @@ package com.blackhole;
 import game.Game;
 import game.Scoreboard;
 import game.maps.gridmaps.GridPoint;
-import game.maps.gridmaps.TriangleMap;
 
 public class BlackHole extends Game<Player> {
 
     private final static int BOARD_SIZE = 6;
     private final static int PIECE_MAX = ((BOARD_SIZE + 1)*BOARD_SIZE/2 -1)/2;
 
-    private final TriangleMap<PlayerPiece> map;
+    private final BlackHoleMap map;
     public BlackHole(){
-        map = new TriangleMap<>(6);
+        map = new BlackHoleMap(6);
     }
 
     @Override
@@ -26,9 +25,11 @@ public class BlackHole extends Game<Player> {
         GridPoint finalPiece = map.emptyLocations().get(0);
         Scoreboard<Player> scoreboard = new Scoreboard<>(directory);
         for (Player player: players){
-            int score = map.getNeighbors(finalPiece).stream().map(map::get).mapToInt(PlayerPiece::getNumber).sum();
+            int score = map.getNeighbors(finalPiece).stream().mapToInt(i -> map.getScore(i, player)).sum();
             scoreboard.addScore(player, score);
         }
         return scoreboard;
     }
+
+
 }
